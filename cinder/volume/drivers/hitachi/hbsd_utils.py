@@ -1,4 +1,5 @@
 # Copyright (C) 2020, 2024, Hitachi, Ltd.
+# Copyright (C) 2025, Hitachi Vantara
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -25,8 +26,8 @@ from oslo_utils import units
 from cinder import exception
 from cinder import utils as cinder_utils
 
-VERSION = '2.3.5'
-CI_WIKI_NAME = 'Hitachi_VSP_CI'
+VERSION = '2.5.0'
+CI_WIKI_NAME = 'Hitachi_CI'
 PARAM_PREFIX = 'hitachi'
 VENDOR_NAME = 'Hitachi'
 DRIVER_DIR_NAME = 'hbsd'
@@ -35,6 +36,9 @@ DRIVER_FILE_PREFIX = 'hbsd'
 TARGET_PREFIX = 'HBSD-'
 HDP_VOL_ATTR = 'HDP'
 HDT_VOL_ATTR = 'HDT'
+DRS_VOL_ATTR = 'DRS'
+VCP_VOL_ATTR = 'VCP'
+VC_VOL_ATTR = 'VC'
 NVOL_LDEV_TYPE = 'DP-VOL'
 TARGET_IQN_SUFFIX = '.hbsd-target'
 PAIR_ATTR = 'HTI'
@@ -656,6 +660,18 @@ class HBSDMsg(enum.Enum):
         'loglevel': base_logging.ERROR,
         'msg': 'Failed to %(operation)s. The LDEV number is not found in the '
                'Cinder object. (%(obj)s: %(obj_id)s)',
+        'suffix': ERROR_SUFFIX,
+    }
+    GET_SNAPSHOT_FROM_SVOL_FAILURE = {
+        'msg_id': 772,
+        'loglevel': base_logging.ERROR,
+        'msg': 'Failed to get snapshot from s-vol %(svol)s. ',
+        'suffix': ERROR_SUFFIX,
+    }
+    VCLONE_PAIR_FAILED = {
+        'msg_id': 773,
+        'loglevel': base_logging.ERROR,
+        'msg': 'Failed to ss2vclone. p-vol=%(pvol)s,s-vol=%(svol)s',
         'suffix': ERROR_SUFFIX,
     }
 
